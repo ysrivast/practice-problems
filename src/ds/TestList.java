@@ -5,11 +5,14 @@ public class TestList {
 	public static void main(String[] args) {
 
 		MyList list = new MyList();
-		list.add(1);
-		list.add(21);
-		list.add(12);
-		list.add(22);
-		list.add(2);
+		for (int i = 9; i > 0; i--) {
+			list.add(i);
+		}
+//		list.add(1);
+//		list.add(21);
+//		list.add(12);
+//		list.add(22);
+//		list.add(2);
 		list.print();
 //		System.out.println(list.size());
 //		list.delete(221);
@@ -19,14 +22,14 @@ public class TestList {
 //		list.cycle();
 //		list.print();
 //		System.out.println(list.hasCycle());
-		list.head=list.reverse(list.head,2);
+		list.reverse(2);
 		list.print();
 //		System.out.println(list.middle());
 	}
 }
 
 class MyList {
-	 Node head;
+	private Node head;
 	private int size;
 
 	static class Node {
@@ -55,14 +58,23 @@ class MyList {
 		size++;
 	}
 
-	public Node reverse(Node node , int k) {
-		Node current = this.head, next = null, prev = null;
+	public void reverse(int i) {
+		this.head=reverse(this.head, i);
+	}
+
+	public Node reverse(Node node, int k) {
+		Node current = node, next = null, prev = null;
 		int count = 0;
-		while (current != null && count++ < k) {
+		while (current != null && count < k) {
 			next = current.next;
 			current.next = prev;
 			prev = current;
 			current = next;
+			count++;
+		}
+		
+		if(next!=null) {
+			node.next= reverse(next, k);
 		}
 		return prev;
 	}
@@ -141,7 +153,7 @@ class MyList {
 	}
 
 	public boolean hasCycle() {
-		Node curr = this.head;
+//		Node curr = this.head;
 		// Approach 1
 //		Set<Integer> set = new HashSet<Integer>();
 //		while(curr!=null) {
@@ -151,7 +163,7 @@ class MyList {
 //		}
 
 		// approach2
-		Node slow = this.head, fast = head;
+		Node slow = this.head, fast = this.head;
 		while (slow != null && fast != null && fast.next != null) {
 			slow = slow.next;
 			fast = fast.next.next;

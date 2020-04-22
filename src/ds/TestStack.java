@@ -12,6 +12,8 @@ public class TestStack {
 		stack.print();
 		stack.pop();
 		stack.print();
+		System.out.println(stack.peek());
+		stack.print();
 	}
 
 }
@@ -34,27 +36,32 @@ class MyStack {
 			this.root = node;
 		} else {
 			Node temp = this.root;
-			this.root=node;
-			node.next=temp;
+			this.root = node;
+			node.next = temp;
 		}
 	}
 
 	public void pop() {
-		if(root == null) {
-			
-		}
-		else {
-			this.root= this.root.next;
+		if (root == null) {
+
+		} else {
+			this.root = this.root.next;
 		}
 	}
 
 	public Integer peek() {
-		return null;
-
+		Node node=null;
+		if (root == null) {
+			return null;
+		} else {
+			node= new Node(root.data);
+			this.root = this.root.next;
+		}
+		return node.data;
 	}
 
 	public boolean isEmpty() {
-		return this.root==null;
+		return this.root == null;
 	}
 
 	public void print() {
